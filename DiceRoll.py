@@ -27,6 +27,12 @@ if __name__ == "__main__":
     prob5 = Fraction(1,6)
     prob6 = Fraction(1,6)
 
+    #default number of probs i.e. # of sides of the dice
+    num_probs = 6
+    
+    #initiate list of probabilities
+    prob_list = []
+    
     # default number of rolls (per experiment)
     Nroll = 1
 
@@ -40,36 +46,20 @@ if __name__ == "__main__":
     if '-seed' in sys.argv:
         p = sys.argv.index('-seed')
         seed = sys.argv[p+1]
-    if '-prob1' in sys.argv:
-        p = sys.argv.index('-prob1')
-        ptemp = float(sys.argv[p+1])
-        if ptemp >= 0 and ptemp <= 1:
-            prob1 = ptemp
-    if '-prob2' in sys.argv:
-        p = sys.argv.index('-prob2')
-        ptemp = float(sys.argv[p+1])
-        if ptemp >= 0 and ptemp <= 1:
-            prob2 = ptemp
-    if '-prob3' in sys.argv:
-        p = sys.argv.index('-prob3')
-        ptemp = float(sys.argv[p+1])
-        if ptemp >= 0 and ptemp <= 1:
-            prob3 = ptemp
-    if '-prob4' in sys.argv:
-        p = sys.argv.index('-prob4')
-        ptemp = float(sys.argv[p+1])
-        if ptemp >= 0 and ptemp <= 1:
-            prob4 = ptemp
-    if '-prob5' in sys.argv:
-        p = sys.argv.index('-prob5')
-        ptemp = float(sys.argv[p+1])
-        if ptemp >= 0 and ptemp <= 1:
-            prob5 = ptemp
-    if '-prob6' in sys.argv:
-        p = sys.argv.index('-prob6')
-        ptemp = float(sys.argv[p+1])
-        if ptemp >= 0 and ptemp <= 1:
-            prob6 = ptemp
+    #read num_probs i.e. number of dice sides
+    if '-num_probs' in sys.argv:
+        p = sys.argv.index('-num_probs')
+        num_probs = int(sys.argv[p+1])
+    #this lets you have a smaller number of inputs! Instead of -p1 0.1 -p2 0.2 ... you can just do -prob_list 0.1 0.2 0.3 ...
+    if '-prob_list' in sys.argv:
+        p = sys.argv.index('-prob_list')
+        for i in range(num_probs):
+            ptemp = float((sys.argv[p+1+i]))
+            if ptemp >= 0 and ptemp <= 1:
+                prob_list = np.append(prob_list, ptemp)
+            else:
+                print("Error: probabilities must be in the range [0,1]")
+                sys.exit(1)
     if '-Nroll' in sys.argv:
         p = sys.argv.index('-Nroll')
         Nt = int(sys.argv[p+1])
@@ -84,6 +74,9 @@ if __name__ == "__main__":
         p = sys.argv.index('-output')
         OutputFileName = sys.argv[p+1]
         doOutputFile = True
+        
+    #extract individual probabilities from list; may have to automate if you choose to work with dice w/o 6 sides
+    prob1, prob2, prob3, prob4, prob5, prob6 = prob_list[0], prob_list[1], prob_list[2], prob_list[3], prob_list[4], prob_list[5]
 
     # class instance of our Random class using seed
     random = Random(seed)
