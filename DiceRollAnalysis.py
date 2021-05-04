@@ -43,10 +43,13 @@ RollsH1 = np.loadtxt(H1)
 print(len(RollsH0),len(RollsH1))
 a0 = []
 a1 = []
+#Use RollsH0.shape or len(RollsH0) to determine the hsape/length of your data; Can you recover Nrolls and Nexp from these data files? If so:
+Nrolls = 
+Nexp = 
                #have to manually change range to match Nexp. Not sure how to get it to change from command line
-for j in range(0,100000):
+for j in range(0,Nexp):
     LLR0 = 0
-    for l in range(0,10):
+    for l in range(0,Nrolls???):
         if RollsH0[j][l] == 1:
            LLR0 = LLR0+math.log(1/10)
         elif RollsH0[j][l] == 2:
@@ -73,9 +76,9 @@ for j in range(0,100000):
            LLR0 = LLR0-math.log(1/6)
     a0.append(LLR0)
 
-for j in range(0,100000):
+for j in range(0,Nexp):
     LLR1 = 0
-    for l in range(0,10):
+    for l in range(0,Nrolls???):
         if RollsH1[j][l] == 1:
            LLR1 = LLR1+math.log(1/10)
         elif RollsH1[j][l] == 2:
@@ -137,7 +140,7 @@ plt.axvline(a0[a], color='red', label=['a = 0.5'])
 plt.legend (['λ = 0.26','H0','H1'],loc = 'upper left' )
 plt.xlabel('log(L$_H$$_1$/L$_H$$_0$)')
 plt.ylabel('Frequency of number')
-plt.title('LLR (10 rolls per experiment, 100000 exp)')
+plt.title('LLR (' + str(Nrolls) + ' rolls per experiment, ' + str(Nexp) + ' exp)')
 plt.text(-5.3, 20000,'a = 0.5', color = 'blue')
 plt.text(-5.3, 19000,'b = 0.038 ', color = 'green')
 plt.show()
