@@ -92,11 +92,11 @@ if __name__ == "__main__":
         outfile = open(OutputFileName, 'w')
         for e in range(0,Nexp):
             for t in range(0,Nroll):
-                outfile.write(str(random.Diceroll(prob1,prob2,prob3,prob4,prob5,prob6))+" ")
+                outfile.write(str(random.Proton(prob1,prob2,prob3,prob4,prob5,prob6))+" ")
             outfile.write(" \n")
         outfile.close()
     else:
         for e in range(0,Nexp):
             for t in range(0,Nroll):
-                print(random.Diceroll(prob1,prob2,prob3,prob4,prob5,prob6), end=' ')
+                print(random.Proton(prob1,prob2,prob3,prob4,prob5,prob6), end=' ')
             print(" ")
